@@ -1,0 +1,43 @@
+/*header...*/
+#header {
+    position: fixed;
+    height: 80px;
+    width: 100%;
+    background-color: black;
+    z-index: 100;
+    top: -80px;
+    box-shadow: 0px 3px 15px rgba(18, 18, 18, 0.8);
+}
+
+.hInnerC {
+    width: 1024px;
+    margin: 0 auto;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+#header ul {
+    float: right;
+    height: 80px;
+
+}
+
+#header li {
+    float: left;
+    color: white;
+    height: 80px;
+    line-height: 80px;
+    width: 100px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+#header li.cur {
+    border-bottom: 3px solid #FF1D03;
+}
+
+#headerLogo {
+    margin-top: 25px;
+}
