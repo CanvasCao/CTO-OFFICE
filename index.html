@@ -11,60 +11,11 @@
             overflow: hidden;
             background: black;
         }
-
-        /*右面的圆*/
-        #circles {
-            position: fixed;
-            height: 70px;
-            width: 15px;
-            top: 50%;
-            right: 3%;
-            display: none;
-        }
-
-        #circles ul li {
-            width: 10px;
-            height: 10px;
-            background-color: #606060;
-            margin: 0 auto 15px;
-            transition: all 0.8s ease 0s;
-            border-radius: 50%;
-            cursor: pointer;
-            position: relative;
-            opacity: 0.5;
-        }
-
-        #circles ul li.cur {
-            background-color: #ffffff;
-            opacity: 0.8;
-        }
-
-        #circles ul li.cur::before {
-            content: "";
-            width: 16px;
-            height: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            position: absolute;
-            left: -4px;
-            top: -4px;
-            border-radius: 50%;
-        }
-
     </style>
 </head>
 <body>
-<div id='header'>
-    <div class='hInnerC'>
-        <img src="img/ori/logo_01.png" id="headerLogo"/>
-        <ul>
-            <li class="cur">事务所介绍</li>
-            <li>原型制作</li>
-            <li>视觉设计</li>
-            <li>项目管理</li>
-            <li>测试管理</li>
-        </ul>
-    </div>
-</div>
+<div id='header'></div>
+
 <div id="container">
     <div id='page0'>
         <img src="img/page0/logo.png" id='p0p1'/>
@@ -79,28 +30,46 @@
         <img id='p2p1' src="img/page2/p2p1.png"/>
     </div>
     <div class='page' id='page3'>
-        <div style="margin-top: 100px">33333</div>
+        <img id='p3p1' src="img/page3/p3p1.png"/>
+        <img id='p3p2' src="img/page3/p3p2.png"/>
+        <img id='p3p3' src="img/page3/p3p3.png"/>
+        <img id='p3Lis' src="img/page3/p3Lis.png"/>
     </div>
     <div class='page' id='page4'>
-        <div style="margin-top: 100px">444</div>
+        <img id='p4p1' src="img/page4/p4p1.png"/>
+        <img id='p4monkey' src="img/page4/p4monkey.png"/>
+        <img id='p4line' src="img/page4/p4line.png"/>
+        <img id='p4full' src="img/page4/p4full.png"/>
+        <img id='p4left' src="img/page4/p4left.png"/>
     </div>
     <div class='page' id='page5'>
-        <div style="margin-top: 100px">555</div>
+        <!-- spec width-->
+        <img id='p5p1' src="img/page5/p5p1.png" width="500"/>
+        <img id='p5cemetery' src="img/page5/p5cemetery.png"/>
+        <img id='p5app' src="img/page5/p5app.png"/>
     </div>
     <div class='page' id='page6'>
-        <div style="margin-top: 100px">666</div>
+        <img id='p6p1' src="img/page6/p6p1.png"/>
+        <img id='p6p2' src="img/page6/p6p2.png"/>
     </div>
     <div class='page' id='page7'>
-        <div style="margin-top: 100px">777</div>
+        <img id='p7p1' src="img/page7/p7p1.png"/>
+        <img id='p7p2' src="img/page7/p7p2.png"/>
+        <img id='p7Shield' src="img/page7/p7Shield.png"/>
     </div>
     <div class='page' id='page8'>
-        <div style="margin-top: 100px">888</div>
+        <img id='p8border' src="img/page8/p8border.png"/>
+        <img id='p8p1' src="img/page8/p8p1.png"/>
+        <img id='p8btns' src="img/page8/p8btns.png"/>
+        <img id='p8circle' src="img/page8/p8circle.png"/>
     </div>
     <div class='page' id='page9'>
-        <div style="margin-top: 100px">999</div>
+        <img id='p9p1' src="img/page9/p9p1.png"/>
+        <img id='p9p2' src="img/page9/p9p2.png"/>
+        <img id='p9cirBig' src="img/page9/p9cirBig.png"/>
+        <img id='p9cirSmall' src="img/page9/p9cirSmall.png"/>
     </div>
 </div>
-
 
 <!--右侧圆点 pof-->
 <div id="circles">
@@ -115,10 +84,10 @@
 <script src='js/tool/jquery.easie.js'></script>
 <script src='js/tool/typed.js'></script>
 <script src='js/page/index.js'></script>
-
 <script src='js/require/require.min.js'></script>
 <script src='js/require/requireConfig.js'></script>
 <script src='js/THREE/app.js'></script>
+<script src='js/viewModel/header.js'></script>
 <script>
     $(function () {
         //jqObj...
@@ -127,7 +96,16 @@
         var $pages = $('.page');
         var $circles = $('#circles');
 
-        //init....
+
+        //href...
+        $header.find('#headerLogo').click(function () {
+            location.href = 'index.html';
+        });
+
+
+        //init...
+        var header = new Header($header, {index: 0});
+        $header.css({top:-80})
         $pages.eq(0).css({top: '0%'}).siblings('.page').css({top: '100%'});
 
         //appendCircle...
@@ -147,6 +125,7 @@
             appThree();
         });
 
+        //首屏LOGO...
         $page0.find('#p0p1').velocity({
             top: '50%',
             left: '50%',
@@ -158,16 +137,15 @@
             'opacity': 1,
             'translateZ': 0,
         }, 2100, 'easeInOutQuint', function () {
-            $page0.find('#p0p1').velocity({top: '49.5%'}, {
+            $page0.find('#p0p1').velocity({top: '49%'}, {
                 loop: true,
                 duration: 2000,
                 easing: 'linear',
             });
-
             $page0.find('#p0Arrow').fadeIn();
         });
 
-        //首屏 按钮点击
+        //首屏 按钮点击...
         $page0.find('#p0Arrow').click(function () {
             $pages.show();
             $page0.velocity({
@@ -180,10 +158,11 @@
 
                 window.AnimateInArr[0]();// page1进场...
                 $circles.fadeIn();// 右侧圆点出现...
-                DoPageChange(0,1);
+//                DoPageChange(window.pageIndex - 1, window.pageIndex);//DEBUG 情商...
             });
         });
 
+//        window.pageIndex = 3;//DEBUG 情商
         appendPageIndex();
 
 
